@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
@@ -15,6 +17,14 @@ public class UnitManager : MonoBehaviour
 
     //szablon spawnowaneyy jednostki
     public GameObject unitPrefab;
+
+    //Lista jednostek bedacych aktualnie nad ta planeta
+    List<GameObject> units;
+
+    private void Start()
+    {
+        units = new List<GameObject>(maxPopulation);
+    }
 
     private void Update()
     {
@@ -34,7 +44,8 @@ public class UnitManager : MonoBehaviour
     {
         if(unitPrefab != null)
         {
-            Instantiate(unitPrefab);
+            var unit = Instantiate(unitPrefab) as GameObject;
+            units.Add(unit);
             population++;
         }
     }
